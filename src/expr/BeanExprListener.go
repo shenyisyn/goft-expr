@@ -5,7 +5,6 @@ import (
 	"github.com/shenyisyn/goft-expr/src/BeanExprLib"
 	"log"
 	"reflect"
-	"strconv"
 	"strings"
 )
 
@@ -26,6 +25,9 @@ func newResultSet() ResultSet {
 }
 func (this ResultSet) IsEmpty() bool {
 	return len(this) == 0
+}
+func (this ResultSet) Len() int {
+	return len(this)
 }
 func result(values []reflect.Value) ResultSet {
 	ret := newResultSet()
@@ -57,31 +59,24 @@ func (this *beanExprListener) ExitFuncCall(ctx *BeanExprLib.FuncCallContext) {
 }
 func (this *beanExprListener) ExitFuncArgs(ctx *BeanExprLib.FuncArgsContext) {
 	for i := 0; i < ctx.GetChildCount(); i++ {
-		token := ctx.GetChild(i).GetPayload().(*antlr.CommonToken)
-		var value reflect.Value
-		switch token.GetTokenType() {
-		case BeanExprLib.BeanExprLexerStringArg:
-			stringArg := strings.Trim(token.GetText(), "'")
-			value = reflect.ValueOf(stringArg)
-			break
-		case BeanExprLib.BeanExprLexerIntArg:
-			v, err := strconv.ParseInt(token.GetText(), 10, 64)
-			if err != nil {
-				panic("parse int64 error")
+		if token, ok := ctx.GetChild(i).GetPayload().(*antlr.BaseParserRuleContext); ok {
+			value := getValueByTokenType(token.GetStart().GetTokenType(), token.GetText(), this)
+			if value.IsValid() {
+				this.args = append(this.args, value)
 			}
-			value = reflect.ValueOf(v)
-			break
-		case BeanExprLib.BeanExprLexerFloatArg:
-			v, err := strconv.ParseFloat(token.GetText(), 64)
-			if err != nil {
-				panic("parse float64 error")
-			}
-			value = reflect.ValueOf(v)
-			break
-		default:
-			continue
 		}
-		this.args = append(this.args, value)
+		//a:=ctx.GetChild(i).GetPayload().(*antlr.BaseParserRuleContext)
+		//
+		//value:=getValueByTokenType(token.GetTokenType(),token.GetText())
+		//if value.IsValid(){
+		//	this.args = append(this.args, value)
+		//}
+		//if a,ok:=ctx.GetChild(i).GetPayload().(*antlr.CommonToken);ok{
+		//	log.Println("111",a.GetText())
+		//}
+
+		//fmt.Printf("%T\n",ctx.GetChild(i).GetPayload())
+
 	}
 
 }

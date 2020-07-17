@@ -3,7 +3,7 @@
 package BeanExprLib // BeanExpr
 import "github.com/antlr/antlr4/runtime/Go/antlr"
 
-// BaseBeanExprListener is a complete expr for a parse tree produced by BeanExprParser.
+// BaseBeanExprListener is a complete listener for a parse tree produced by BeanExprParser.
 type BaseBeanExprListener struct{}
 
 var _ BeanExprListener = &BaseBeanExprListener{}
@@ -38,8 +38,26 @@ func (s *BaseBeanExprListener) EnterFuncCall(ctx *FuncCallContext) {}
 // ExitFuncCall is called when production FuncCall is exited.
 func (s *BaseBeanExprListener) ExitFuncCall(ctx *FuncCallContext) {}
 
+// EnterFuncCallWithCompare is called when production FuncCallWithCompare is entered.
+func (s *BaseBeanExprListener) EnterFuncCallWithCompare(ctx *FuncCallWithCompareContext) {}
+
+// ExitFuncCallWithCompare is called when production FuncCallWithCompare is exited.
+func (s *BaseBeanExprListener) ExitFuncCallWithCompare(ctx *FuncCallWithCompareContext) {}
+
 // EnterFuncArgs is called when production FuncArgs is entered.
 func (s *BaseBeanExprListener) EnterFuncArgs(ctx *FuncArgsContext) {}
 
 // ExitFuncArgs is called when production FuncArgs is exited.
 func (s *BaseBeanExprListener) ExitFuncArgs(ctx *FuncArgsContext) {}
+
+// EnterComparisonOperator is called when production comparisonOperator is entered.
+func (s *BaseBeanExprListener) EnterComparisonOperator(ctx *ComparisonOperatorContext) {}
+
+// ExitComparisonOperator is called when production comparisonOperator is exited.
+func (s *BaseBeanExprListener) ExitComparisonOperator(ctx *ComparisonOperatorContext) {}
+
+// EnterConstant is called when production constant is entered.
+func (s *BaseBeanExprListener) EnterConstant(ctx *ConstantContext) {}
+
+// ExitConstant is called when production constant is exited.
+func (s *BaseBeanExprListener) ExitConstant(ctx *ConstantContext) {}
