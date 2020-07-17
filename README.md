@@ -14,6 +14,9 @@ golang表达式解析器和执行
 ##教学视频
 * http://b.jtthink.com/read.php?tid=549&fid=2
 
+##安装
+go get -u github.com/shenyisyn/goft-expr
+
 ##使用方法
 执行函数
 ```go
