@@ -1,4 +1,4 @@
-package main
+package examples
 
 import (
 	"fmt"
@@ -27,7 +27,7 @@ func NewUser(name string, role string) *User {
 	return &User{Name: name, Role: &UserRole{RoleName: role}}
 }
 
-func main() {
+func structExpr() {
 	exprMap2 := map[string]interface{}{
 		"user": NewUser("jtthink", "admin"),
 	}
