@@ -2,8 +2,7 @@ package expr
 
 import (
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-
-	"goft-expr/src/BeanExprLib"
+	"github.com/shenyisyn/goft-expr/src/BeanExprLib"
 	"log"
 	"reflect"
 	"strconv"
