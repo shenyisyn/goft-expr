@@ -1,0 +1,15 @@
+T__0=1
+T__1=2
+T__2=3
+StringArg=4
+FloatArg=5
+IntArg=6
+FuncName=7
+MethodName=8
+Dot=9
+Float=10
+WHITESPACE=11
+'('=1
+')'=2
+','=3
+'.'=9
