@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"goft-expr/src/expr"
+	"github.com/shenyisyn/goft-expr/src/expr"
 	"log"
 )
 

@@ -1,4 +1,4 @@
-module goft-expr
+module github.com/shenyisyn/goft-expr
 
 go 1.14
 
