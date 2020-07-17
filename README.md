@@ -8,13 +8,13 @@
 * 注解解析（类Java)
 * 简易规则引擎
 
-##版本要求
+## 版本要求
 * golang >=1.12
  
-##教学视频
+## 教学视频
 * http://b.jtthink.com/read.php?tid=549&fid=2
 
-##安装
+## 安装
 * go get -u github.com/shenyisyn/goft-expr
 
 ## 支持的参数
@@ -23,10 +23,12 @@
 * bool形态 , true或false(小写)
 * 函数嵌套（字符串的形式)
 
-##使用方法
-
-* 执行函数
+## 使用方法--纯函数执行
 ```go
+import (
+	"fmt"
+	"github.com/shenyisyn/goft-expr/src/expr"
+)
 type TestReulst struct{}
 func (this *TestReulst) Name() string {
 	return "test-result"
@@ -70,6 +72,41 @@ test-result
 
 
 ```
+## 使用方法--struct方法执行
+```go
+import (
+	"fmt"
+	"github.com/shenyisyn/goft-expr/src/expr"
+)
+type UserRole struct {
+	RoleName string
+}
+func(this *UserRole) GetRole(prefix string) string {
+	return prefix+":"+this.RoleName
+}
+type User struct {
+	Name string
+	Role *UserRole
+}
+func(this *User) GetName() string {
+	return this.Name
+}
+//初始化用户实体
+func NewUser(name string,role string ) *User {
+	return &User{Name:name,Role:&UserRole{RoleName:role}}
+}
+
+func main(){
+   exprMap2:=map[string]interface{}{
+   	"user":NewUser("jtthink","admin"),
+   }
+   fmt.Println(expr.BeanExpr("user.GetName()",exprMap2)) //方法名 大小写敏感
+   fmt.Println(expr.BeanExpr("user.Role.GetRole('当前角色是')",exprMap2)) //方法名 大小写敏感
+}
+
+```
+
+
 
 ## License
 © jtthink, 2020~time.Now
