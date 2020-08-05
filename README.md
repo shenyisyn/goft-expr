@@ -25,7 +25,7 @@
 * http://b.jtthink.com/read.php?tid=549&fid=2
 
 ## 安装
-* go get -u github.com/shenyisyn/goft-expr
+* go get -u github.com/shenyisyn/goft-expr@v0.3.0
 
 ## 支持的参数
 * 字符串(使用英文单引号，如 'abc')
